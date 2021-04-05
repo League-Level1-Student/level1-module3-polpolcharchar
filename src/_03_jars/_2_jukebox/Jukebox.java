@@ -62,16 +62,16 @@ public class Jukebox implements Runnable, ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("check");
+		System.out.println("Button presed");
 		
 		// TODO Auto-generated method stub
-		if (e.equals(button1)) {
+		if (e.getSource()==button1) {
 			song2.stop();
 			System.out.println("2 stopped");
 			song1.play();
 			System.out.println("1 played");
 			
-		}else if(e.equals(button2)) {
+		}else if(e.getSource()==button2) {
 			song1.stop();
 			System.out.println("1 stopped");
 			song2.play();

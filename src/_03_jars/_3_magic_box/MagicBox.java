@@ -54,6 +54,7 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 		JFrame frame = new JFrame("The Magic Box contains many secrets...");
 		frame.add(this);
 		setPreferredSize(new Dimension(backgroundImage.getWidth(), backgroundImage.getHeight()));
+		frame.addMouseListener(this);
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
@@ -72,16 +73,23 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	public void paintComponent(Graphics g) {
 		g.drawImage(backgroundImage, 0, 0, null);
 	}
-
+	JFrame frame = new JFrame();
+	MediaPalace m = new MediaPalace();
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if((e.getY()<100 && e.getX() <100) || (e.getY() >400 && e.getY()<440 && e.getX() < 50) || (e.getY() >400 && e.getY()<440 && e.getX() > 555)) {
+			System.out.println("in box");
+			frame.add(m.loadImageFromWithinProject("Surprise.png"));
+			frame.setVisible(true);
+			frame.pack();
+		}
 		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
+		
 		
 	}
 
