@@ -1,10 +1,11 @@
 
 int hopDistance = 50;
-int frogX = 50;
-int frogY = 50;
+int frogX = 200;
+int frogY = 400;
 
-Car c1 = new Car(50, 50, 80, 20);
-Car c2 = new Car(300, 100, 80, 20);
+Car c1 = new Car(50, 50, 80, 3);
+Car c2 = new Car(300, 100, 50, 5);
+Car c3 = new Car(250, 200, 120, 2);
 
 
 
@@ -15,12 +16,21 @@ void setup(){
 
 void draw(){
   background(50, 50, 50);
+  c1.driveLeft();
+  c2.driveRight();
+  c3.driveRight();
   c1.display();
   c2.display();
+  c3.display();
   fill(0, 200, 50);
   
   keepInside();
   ellipse(frogX, frogY, 50, 50);
+  
+  if(intersects(c1) || intersects(c2) || intersects(c3)){
+    frogX = 200;
+    frogY = 400;
+  }
 }
 
 void keyPressed(){
@@ -68,9 +78,48 @@ class Car{
     speed = sPeed;
   }
   
+  void driveLeft(){
+    carX-=speed;
+    if(carX<0){
+      carX = width;
+    }
+  }
+    void driveRight(){
+    carX+=speed;
+    if(carX>width){
+      carX = -20;
+    }
+  }
+  
+  int getX(){
+    return carX;
+  }
+  
+  int getY(){
+    return carY;
+  }
+  
+  int getSize(){
+    return size;
+  }
+  
+  
+  
   void display(){
     fill(0, 255, 0);
     rect(carX, carY, size, 50);
   }
   
+}
+
+
+
+boolean intersects(Car car) {
+ if ((frogY > car.getY() && frogY < car.getY()+50) &&
+                (frogX > car.getX() && frogX < car.getX()+car.getSize())) {
+   return true;
+  }
+ else  {
+  return false;
+ }
 }
